@@ -1,7 +1,7 @@
 #include <genesis.h>
 
 __attribute__((externally_visible))
-const ROMHeader rom_header = {
+rom_header = (ROMHeader){
 #if (ENABLE_BANK_SWITCH != 0)
     "SEGA SSF        ",
 #elif (MODULE_MEGAWIFI != 0)
@@ -10,8 +10,8 @@ const ROMHeader rom_header = {
     "SEGA MEGA DRIVE ",
 #endif
     "(C)SGDK 2024    ",
-    "SAMPLE PROGRAM                                  ",
-    "SAMPLE PROGRAM                                  ",
+    "SAMPLE DEEZ NUTS                                ",
+    "SAMPLE DEEZ NUTS                                ",
     "GM 00000000-00",
     0x000,
     "JD              ",
