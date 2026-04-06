@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: bob the builder
 
 # Controls when the workflow will run
 on:
@@ -25,12 +25,22 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Build ROM using SGDK Docker
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          # Run as current user to avoid permission issues
+          docker run --rm -v "$PWD:/src" -w /src -e GDK=/sgdk --user $(id -u):$(id -g) ghcr.io/stephane-d/sgdk:latest -f /sgdk/makefile.gen
+          
+      - name: Find ROM file
+        run: |
+          echo "Looking for ROM..."
+          ls -la out/ 2>/dev/null || echo "No out directory"
+          find . -name "*.bin" -o -name "*.md" 2>/dev/null | head -5
+          
+      - name: Upload ROM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gop
+          path: |
+            out/*.bin
+            out/*.md
+          if-no-files-found: warn
