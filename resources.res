@@ -1,1 +1,1 @@
-IMAGE img_beebo "res/beebo.png" APLIB
+IMAGE img_cloudybg "res/cloudybg.png" APLIB
