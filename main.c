@@ -1,5 +1,4 @@
 #include <genesis.h>
-#include <gfx.h>
 
 u16 ind=TILE_USER_INDEX;
 
