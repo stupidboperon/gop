@@ -1,4 +1,5 @@
 #include <genesis.h>
+#include "../resources.h"
 
 u16 ind=TILE_USER_INDEX;
 
